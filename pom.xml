@@ -10,7 +10,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <springframework.version>3.2.2.RELEASE</springframework.version>
+        <springframework.version>4.0.6.RELEASE</springframework.version>
     </properties>
 
     <dependencies>
@@ -84,6 +84,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
