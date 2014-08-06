@@ -6,6 +6,12 @@ An amazingly easy web application to generate JSON responses, PDF and HTML repor
 **DEMO**
 You can access a live deployment of this app here : *http://162.248.10.127:8080/generic-reporter/*
 
+- To generate json data, use the extension **.json**
+- To generate html reports, use the extension **.html**
+- To generate PDF reports, use the extension **.pdf**
+
+Colors, Logo and database connections are configurable in application.properties
+
 In the sample webapp, the database has three tables:
 
 * Users: id (INT), username(VARCHAR), password(VARCHAR), email(VARCHAR)
@@ -24,9 +30,7 @@ It also has four procedures that get different data from the three tables, the p
 The application handles procedures with or without parameters. Procedure Parameters are sent as part of the HTTP request.
 
 
-- To generate json data, use the extension **.json**
-- To generate html reports, use the extension **.html**
-- To generate PDF reports, use the extension **.pdf**
+
 
 
 Simple and easy :)
