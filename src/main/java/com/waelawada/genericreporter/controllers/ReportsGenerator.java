@@ -1,6 +1,7 @@
 package com.waelawada.genericreporter.controllers;
 
 import com.google.gson.Gson;
+import com.waelawada.genericreporter.utils.ProcedureUtils;
 import com.waelawada.genericreporter.views.LandscapePdfView;
 import com.waelawada.genericreporter.views.PortraitPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,57 +155,6 @@ public class ReportsGenerator {
         }
     }
 
-
-    /**
-     * Returns the List of parameters for a certain function as a string
-     *
-     * @param dbName
-     * @param functionName
-     * @return string representing the parameters of the function
-     * @throws SQLException
-     */
-    private String getFunctionParameterListAsString(String dbName, String functionName) throws SQLException {
-        String sql = "Select param_list from mysql.proc where name=? and db=?";
-        String paramList = "";
-        PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(sql);
-        preparedStatement.setString(1, functionName);
-        preparedStatement.setString(2, dbName);
-        ResultSet rs1 = preparedStatement.executeQuery();
-        while (rs1.next()) {
-            paramList = rs1.getString(1);
-        }
-        return paramList;
-    }
-
-    /**
-     * Get the parameters of a function as a map that contains the name of the parameter and its SQL type.
-     *
-     * @param dbName
-     * @param functionName
-     * @return Map containing the parameter name and type
-     * @throws SQLException
-     * @throws IOException
-     */
-    private Map<String, String> getFunctionParameterListAsMap(String dbName, String functionName) throws Exception {
-
-        Map<String, String> paramMap = new HashMap<String, String>();
-
-        String paramList = getFunctionParameterListAsString(dbName, functionName);
-        StringTokenizer tokenizeParamList = new StringTokenizer(paramList, ",");
-        while (tokenizeParamList.hasMoreTokens()) {
-            String param = tokenizeParamList.nextToken();
-            StringTokenizer tokenizeParamString = new StringTokenizer(param, " ");
-            String direction = tokenizeParamString.nextToken();
-            String paramName = tokenizeParamString.nextToken();
-            String paramType = tokenizeParamString.nextToken();
-            if (paramType.contains("(")) {
-                paramType = paramType.substring(0, paramType.indexOf("("));
-            }
-            paramMap.put(paramName, paramType);
-        }
-        return paramMap;
-    }
-
     /**
      * Generated the call statement based on the function name, database name and the parameters
      *
@@ -238,12 +188,11 @@ public class ReportsGenerator {
      */
     private ArrayList getResultSetAsArray(String dbName, String functionName, Map<String, String[]> parameters) throws Exception {
         ArrayList<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
-        Map<String, String> params = getFunctionParameterListAsMap(dbName, functionName);
+        Map<String, String> params = ProcedureUtils.getFunctionParameterListAsMap(dbName, functionName, dataSource);
         String sqlString = getQueryString(dbName, functionName, params);
 
         ResultSet functionResult = executeQueryString(sqlString, params, parameters);
         ResultSetMetaData metaData = functionResult.getMetaData();
-
 
         while (functionResult.next()) {
             Map<String, String> result = new HashMap<String, String>();
