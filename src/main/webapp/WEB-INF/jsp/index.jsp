@@ -15,7 +15,7 @@
 
 <html>
 <head>
-    <title>Transaction Reports</title>
+    <title>Reports</title>
 </head>
 <body>
 <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/">
@@ -29,6 +29,11 @@
                 There are no procedures currently in your database.
             </c:when>
             <c:otherwise>
+                <strong>Please note : To get HTML Report, Change the extension from .json to .html
+                <br/>
+                Please note : To get PDF Report, Change extension of the page to .pdf</strong>
+                <br/>
+
                 <table border="1">
                     <tr>
                         <td colspan="3">List of all available procedures</td>
@@ -42,7 +47,7 @@
                         <%--@elvariable id="procedures" type="java.util.List"--%>
                     <c:forEach items="${procedures}" var="procedure">
                         <tr>
-                            <c:set var="linkToProcedure" value="/report/${procedure.database}/${procedure.name}.json"/>
+                            <c:set var="linkToProcedure" value="report/${procedure.database}/${procedure.name}.json"/>
                             <td rowspan="${fn:length(procedure.parameters)}">${procedure.database}.${procedure.name}</td>
                             <td>
                                 <table border="1">
@@ -80,7 +85,7 @@
                                 </table>
                             </td>
                             <td>
-                                <c:out value="${linkToProcedure}"/>
+                                <a href="${linkToProcedure}"><c:out value="${linkToProcedure}"/></a>
                             </td>
                         </tr>
                     </c:forEach>
