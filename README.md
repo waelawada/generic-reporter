@@ -8,20 +8,18 @@ You can access a live deployment of this app here : *http://162.248.10.127:8080/
 
 In the sample webapp, the database has three tables:
 
-Users: id (INT), username(VARCHAR), password(VARCHAR), email(VARCHAR)
-
-Plans: id(INT), name(VARCHAR), description(VARCHAR), price(FLOAT)
-
-User_Plan : user_id(int), plan_id (int)
+* Users: id (INT), username(VARCHAR), password(VARCHAR), email(VARCHAR)
+* Plans: id(INT), name(VARCHAR), description(VARCHAR), price(FLOAT)
+* User_Plan : user_id(int), plan_id (int)
 
 
 It also has four procedures that get different data from the three tables, the procedures are:
 
-*get_all_plans
-*get_all_users
-*get_all_users_and_their_plans
-*get_user_plan
-*get_uset_plan_by_username
+* get_all_plans
+* get_all_users
+* get_all_users_and_their_plans
+* get_user_plan
+* get_uset_plan_by_username
 
 The application handles procedures with or without parameters. Procedure Parameters are sent as part of the HTTP request.
 
