@@ -24,9 +24,9 @@ It also has four procedures that get different data from the three tables, the p
 The application handles procedures with or without parameters. Procedure Parameters are sent as part of the HTTP request.
 
 
--To generate json data, use the extension **.json**
--To generate html reports, use the extension **.html**
--To generate PDF reports, use the extension **.pdf**
+- To generate json data, use the extension **.json**
+- To generate html reports, use the extension **.html**
+- To generate PDF reports, use the extension **.pdf**
 
 
 Simple and easy :)
