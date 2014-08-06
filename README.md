@@ -17,24 +17,20 @@ User_Plan : user_id(int), plan_id (int)
 
 It also has four procedures that get different data from the three tables, the procedures are:
 
-get_all_plans
-
-get_all_users
-
-get_all_users_and_their_plans
-
-get_user_plan
-
-get_uset_plan_by_username
+*get_all_plans
+*get_all_users
+*get_all_users_and_their_plans
+*get_user_plan
+*get_uset_plan_by_username
 
 The application handles procedures with or without parameters. Procedure Parameters are sent as part of the HTTP request.
 
 
-To generate json data, use the extension .json
+To generate json data, use the extension **.json**
 
-To generate html reports, use the extension .html
+To generate html reports, use the extension **.html**
 
-To generate PDF reports, use the extension .pdf
+To generate PDF reports, use the extension **.pdf**
 
 
 Simple and easy :)
