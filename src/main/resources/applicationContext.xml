@@ -20,6 +20,10 @@
           class="com.waelawada.genericreporter.views.PortraitPdfView">
     </bean>
 
+    <bean id="csvView"
+          class="com.waelawada.genericreporter.views.CsvView">
+    </bean>
+
     <bean id="gson" class="com.google.gson.Gson" />
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

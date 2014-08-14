@@ -1,7 +1,9 @@
 package com.waelawada.genericreporter.controllers;
 
+import au.com.bytecode.opencsv.CSVWriter;
 import com.google.gson.Gson;
 import com.waelawada.genericreporter.utils.ProcedureUtils;
+import com.waelawada.genericreporter.views.CsvView;
 import com.waelawada.genericreporter.views.LandscapePdfView;
 import com.waelawada.genericreporter.views.PortraitPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.InternalResourceView;
+import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.text.DateFormat;
@@ -44,6 +50,9 @@ public class ReportsGenerator {
 
     @Autowired
     private PortraitPdfView portraitPdfView;
+
+    @Autowired
+    private CsvView csvView;
 
     @Value("${company.logo}")
     private String logoUrl;
@@ -113,6 +122,24 @@ public class ReportsGenerator {
         }
 
     }
+
+    @RequestMapping(value = "/{dbName}/{functionName}", produces = "text/csv")
+    public ModelAndView getFunctionResultAsCSV(@PathVariable String dbName, @PathVariable String functionName, HttpServletRequest request){
+        Map<String, Object> model = new HashMap<String, Object>();
+
+        try {
+            ArrayList<Map<String, String>> result = getResultSetAsArray(dbName, functionName, request.getParameterMap());
+            model.put("csvData", result);
+            return  new ModelAndView(csvView, model);
+        }
+        catch(Exception e){
+            model.clear();
+            model.put("message", e.getMessage());
+            return new ModelAndView("error/exception", model);
+        }
+
+    }
+
 
     /**
      * By providing a database name and a function name with a PDF extension, the result set will be added to a map and send to the PDF view.

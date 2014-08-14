@@ -31,6 +31,7 @@
         <property name="mediaTypes">
             <map>
                 <entry key="json" value="application/json"/>
+                <entry key="csv" value="text/csv"/>
                 <entry key="html" value="text/html"/>
                 <entry key="pdf" value="application/pdf"/>
             </map>

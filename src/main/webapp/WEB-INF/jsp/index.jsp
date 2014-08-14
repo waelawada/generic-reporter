@@ -85,7 +85,7 @@
                                 </table>
                             </td>
                             <td>
-                                <a href="${linkToProcedure}"><c:out value="${linkToProcedure}"/></a>
+                                <a href="${linkToProcedure}">JSON</a>, <a href="${fn:replace(linkToProcedure, ".json", ".pdf" )}}">PDF</a>, <a href="${fn:replace(linkToProcedure, ".json", ".html" )}">HTML</a>, <a href="${fn:replace(linkToProcedure, ".json", ".csv" )}">CSV</a>
                             </td>
                         </tr>
                     </c:forEach>
